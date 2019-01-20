@@ -24,6 +24,14 @@ if (process.argv[2] === 'concert-this') {
     var artist = process.argv.slice(3, process.argv.length).join(" ");
 };
 
+var song = process.argv.slice(3, process.argv.length).join(" ");
+song = "The Sign Ace Of Base";
+
+var song = process.argv.slice(2, process.argv.length).join(" ");
+song = "The Sign Ace Of Base";
+
+
+
 // bandsintown
 //     .getArtistEventList(artist)
 //     .then(function (response) {
