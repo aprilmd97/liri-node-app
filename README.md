@@ -14,7 +14,9 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
     
 4. Run this command in your terminal:
 
-node liri.js spotify-this-song '<song name here>'
+
+node liri.js spotify-this-song <song name here>
+   
    
 5. The output should look like the example below:
 
@@ -22,7 +24,9 @@ EX. 1
 
 INPUT
 
-node liri.js spotify-this-song '<song name here>'
+
+node liri.js spotify-this-song <song name here>
+   
   
 OUTPUT
 
