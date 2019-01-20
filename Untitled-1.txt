@@ -1,0 +1,50 @@
+function spotifyThis(songName) {
+
+    spotify.search({
+        type: 'track',
+        query: songName,
+        limit: 10
+    }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        console.log("artist name  :", data.tracks.items[0].album.artists[0].name);
+        console.log("song name: ", data.tracks.items[0].name);
+        console.log("preview url: ", data.tracks.items[0].href);
+        console.log("Album name", data.tracks.items[0].album.name);
+        var songResult = [];
+        data.tracks.items.forEach(e => {
+            var song = {
+                'Artist_name': e.album.artists[0].name,
+                'Song_Name': e.name,
+                'Preview_Url': e.href,
+                'Album_Name': e.name
+            }
+            songResult.push(song);
+        });
+
+        const table = cTable.getTable(songResult);
+
+        console.log(table);
+
+
+        fs.appendFile("log.txt", "\n" + table, function (err) {
+            if (err) {
+                return console.log(err);
+            } else {
+                console.log("log.txt was updated");
+            }
+        });
+    });
+}
+
+switch (process.argv[2]) {
+    case 'spotify-this-song':
+        var resultFormatted = process.argv.slice(3, process.argv.length).join(" ");
+        spotifyThis(resultFormatted);
+        break;
+
+    default:
+        console.log('invalid entry');
+} 
