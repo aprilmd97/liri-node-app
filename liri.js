@@ -1,3 +1,6 @@
+
+var fs = require("fs");
+
 require("dotenv").config();
 
 var keys = require("./key.js");
@@ -9,28 +12,29 @@ var Spotify = require('node-spotify-api');
 // });
 
 var spotify = new Spotify(keys.spotify);
+
+
+
 // var bandsintown = require('bandsintown')('codingbootcamp');
 
 
 if (process.argv[2] === 'spotify-this-song') {
-    //var song = process.argv.length.join(" ");
+
+    // var song = process.argv.length.join(" ");
     // this processes all characters as a single argument
+
     var song = process.argv.slice(3, process.argv.length).join(" ");
-} else {
-    var song = process.argv.slice(2, process.argv.length).join(" ");
+
 };
 
-if (process.argv[2] === 'concert-this') {
-    var artist = process.argv.slice(3, process.argv.length).join(" ");
+if (!process.argv[2] || !process.argv[3]) {
+
+   var song = "The Sign Ace Of Base";
 };
 
-var song = process.argv.slice(3, process.argv.length).join(" ");
-song = "The Sign Ace Of Base";
-
-var song = process.argv.slice(2, process.argv.length).join(" ");
-song = "The Sign Ace Of Base";
-
-
+// if (process.argv[2] === 'concert-this') {
+//     var artist = process.argv.slice(3, process.argv.length).join(" ");
+// };
 
 // bandsintown
 //     .getArtistEventList(artist)
@@ -44,6 +48,16 @@ song = "The Sign Ace Of Base";
 spotify
     .search({ type: 'track', query: song, limit: '5' })
     .then(function (response) {
+
+        fs.appendFile("log.txt", song + " ", function (err) {
+
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Added to Log!");
+            };
+
+        });
 
         response.tracks.items.forEach(function (number) {
 
@@ -63,6 +77,8 @@ spotify
     .catch(function (err) {
         console.log(err);
     });
+
+
 
 
 
